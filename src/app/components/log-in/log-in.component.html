@@ -1,0 +1,26 @@
+<!-- log-in.component.html -->
+
+<div class="container">
+  <h2>Login</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <label>Email: <span class="required-asterisk" style="color: red">*</span></label>
+    <input formControlName="email" type="email" required />
+    <div *ngIf="loginForm.get('email').hasError('required') && loginForm.get('email').touched" class="error-message">
+      Email is required.
+    </div>
+    <div *ngIf="loginForm.get('email').hasError('email') && loginForm.get('email').touched" class="error-message">
+      Please enter a valid email address.
+    </div>
+
+    <br> <label>Password:  <span class="required-asterisk" style="color: red">*</span></label>
+    <input formControlName="password" type="password" required />
+    
+    <div *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched"
+      class="error-message">
+      Password is required.
+    </div>
+    <br> <button type="button" [disabled]="!loginForm.valid" (click)="onLoginButtonclick()"><b>Login</b></button>
+  </form>
+  <h3>---------------Don't have an account ?----------------</h3>
+  <button (click)="onSignupClick()"><b>Signup</b></button>
+</div>

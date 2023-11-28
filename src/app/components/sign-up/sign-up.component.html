@@ -1,0 +1,96 @@
+<!-- signup.component.html -->
+
+<div class="container1">
+  <h2>Signup</h2>
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <label>First Name:  <span class="required-asterisk" style="color: red">*</span></label>
+    <input formControlName="firstname" type="text" required />
+    <div *ngIf="signupForm.get('firstname').hasError('required') && signupForm.get('firstname').touched"
+      class="error-message">
+      <i>
+      First Name is required.
+    </i>
+    
+    </div>
+    <div *ngIf="signupForm.get('firstname').hasError('minlength')"
+    class="error-message">
+    <i>
+      First Name must be at least 2 to 35 characters long and should not start with numberic value.
+    </i>
+  </div>
+    <br><label>Last Name:  <span class="required-asterisk" style="color: red">*</span></label>
+    <input formControlName="lastname" type="text" required />
+    <div *ngIf="signupForm.get('lastname').hasError('required') && signupForm.get('lastname').touched"
+      class="error-message">
+      <i>
+      Last Name is required.
+     </i>
+    </div>
+    <div *ngIf="signupForm.get('lastname').hasError('minlength')"
+    class="error-message">
+    <i>
+      First Name must be at least 2 to 35 characters long and should not start with numberic value.
+    </i>
+  </div>
+
+    <br>  <label for="email"
+    >Email
+    <span
+      style="color: red"
+      *ngIf="
+        isFieldInvalid('email') &&
+        !signupForm.controls['email'].hasError('required') &&
+        !signupForm.controls['email'].hasError('pattern')
+      "
+    >
+      *</span
+    ></label
+  >
+  <input
+    type="email"
+    id="email"
+    name="email"
+    formControlName="email"
+    required
+  />
+  <div *ngIf="isFieldInvalid('email')">
+    <i
+      style="color: red"
+      *ngIf="signupForm.controls['email'].hasError('required')"
+    >
+      Email is required
+    </i>
+    <i
+      style="color: red"
+      *ngIf="signupForm.controls['email'].hasError('pattern')"
+    >
+      Email should not start with number or Special character and should be in alphanumeric format.
+    </i>
+  </div>
+
+
+    <br> <label>Password:  <span class="required-asterisk" style="color: red">*</span></label>
+    <input formControlName="password" type="password" required />
+    
+    <div class="error-message"  *ngIf="signupForm.get('password')?.hasError('required') && signupForm.get('password').touched">
+     <i> Password is required</i>
+    </div>
+    <div *ngIf="!signupForm.get('password').hasError('required') && signupForm.get('password').touched && signupForm.get('password').invalid" class="error-message">
+     <i> Password must contain one Upper case , Lowercase , Special character, Numeric character and must have length 8 characters and does not conatin any space</i>
+    </div>
+    
+
+    <br> <label>Phone:  <span class="required-asterisk" style="color: red">*</span></label>
+    <input formControlName="phone" type="tel" required />
+    <div *ngIf="signupForm.get('phone').hasError('required') && signupForm.get('phone').touched" class="error-message">
+     <i> Phone is required.</i>
+    </div>
+    <div *ngIf="!signupForm.get('phone').hasError('required') && signupForm.get('phone').touched && signupForm.get('phone').invalid" class="error-message">
+    <i> Phone no. is invalid.</i> 
+    </div>
+    
+    <br> <button type="submit" [disabled]="!signupForm.valid"><b>Signup</b></button>
+  </form>
+  <h3>-------------Already have an account ?--------------</h3>
+  <button (click)="onLoginClick()"><b>Login</b></button>
+</div>
